@@ -58,4 +58,12 @@ pour le moment, on a seulement le chemin vers la page d'accueil par défaut
         }
     }
 
+! à compléter
+
+## installation des annotations
+Elles servent pour les routes, les mapping de bases de données, la documentation, les tests etc...
+
+    composer require annotations
+
+
     

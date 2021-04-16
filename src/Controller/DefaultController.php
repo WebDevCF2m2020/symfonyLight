@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 // chargement du module de réponse
 use Symfony\Component\HttpFoundation\Response;
 
+// chargement des annotations de Route
+use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * Description of DefaultController extends de AbstractController
@@ -33,5 +36,14 @@ class DefaultController extends AbstractController {
         
         return new Response("Hello $name", 200);
         
+    }
+    /**
+     * @Route(name="page", path="/page/{idPage}",requirements={"idPage"="\d+"})
+     * @param type $idPage
+     * @Return Response
+     */
+    public function page($idPage) {
+        $array = [1=>"lulu",2=>"lala",3=>"coucou"];
+        return new Response($array[$idPage]);
     }
 }
