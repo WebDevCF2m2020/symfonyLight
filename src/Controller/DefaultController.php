@@ -28,4 +28,10 @@ class DefaultController extends AbstractController {
                 ];
         return $this->json($array);
     }
+    
+    public function helloToYou($name) {
+        
+        return new Response("Hello $name", 200);
+        
+    }
 }

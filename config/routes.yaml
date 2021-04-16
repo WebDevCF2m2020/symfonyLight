@@ -1,6 +1,13 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+# exemple de json    
 api:
     path: /MyApi
     controller: App\Controller\DefaultController::api
+# gestion d'une variable get    
+hello:
+    path: /hello/{name}
+    controller: App\Controller\DefaultController::helloToYou
+    defaults:
+        name: "Anonymous"
