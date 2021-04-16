@@ -58,12 +58,68 @@ pour le moment, on a seulement le chemin vers la page d'accueil par défaut
         }
     }
 
-! à compléter
+## Création des routes en Yaml
+
+    config/routes.yaml
+
+    index:
+        path: /
+        controller: App\Controller\DefaultController::index
+    # exemple de json    
+    api:
+        path: /MyApi
+        controller: App\Controller\DefaultController::api
+    # gestion d'une variable get    
+    hello:
+        path: /hello/{name}
+        controller: App\Controller\DefaultController::helloToYou
+        defaults:
+            name: "Anonymous"
+
+Attention, le yaml est stricte pour les tabulations, nous ne l'utiliserons au final que pour les fichiers de configurations
+
+### Liens avec le contrôleur
+
+    src/Controller/DefaultController.php
+    ...
+    public function index(){
+        return new Response("Hello World!",200);
+    }
+    
+    public function api(){
+        $array = ["identité"=>
+            ["nom"=>"Pitz","prénom"=>"Michaël"], 
+            ["nom"=>"Sandron","prénom"=>"Pierre"],
+                ];
+        return $this->json($array);
+    }
+    
+    public function helloToYou($name) {
+        
+        return new Response("Hello $name", 200);
+        
+    }
 
 ## installation des annotations
 Elles servent pour les routes, les mapping de bases de données, la documentation, les tests etc...
 
     composer require annotations
 
+On peut ensuite les utiliser directement dans le contrôleur:
 
+    src/Controller/DefaultController.php
+    ...
+    // chargement des annotations de Route
+    use Symfony\Component\Routing\Annotation\Route;
+    ...
+    /**
+     * @Route(name="page", path="/page/{idPage}",requirements={"idPage"="\d+"})
+     * @param type $idPage
+     * 
+     */
+    public function page($idPage) {
+        $array = [1=>"lulu",2=>"lala",3=>"coucou"];
+        return new Response($array[$idPage]);
+    }
     
+Vous pouvez maintenant voir l'url : https://127.0.0.1:8000/page/3

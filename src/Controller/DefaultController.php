@@ -40,7 +40,7 @@ class DefaultController extends AbstractController {
     /**
      * @Route(name="page", path="/page/{idPage}",requirements={"idPage"="\d+"})
      * @param type $idPage
-     * @Return Response
+     * 
      */
     public function page($idPage) {
         $array = [1=>"lulu",2=>"lala",3=>"coucou"];
