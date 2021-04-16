@@ -49,8 +49,13 @@ pour le moment, on a seulement le chemin vers la page d'accueil par défaut
     // chargement de la classe abstraite gérant les contrôleurs dans Symfony
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+    // chargement du module de réponse
+    use Symfony\Component\HttpFoundation\Response;
+
     class DefaultController extends AbstractController {
-        //put your code here
+        public function index(){
+            return new Response("Hello World!",200);
+        }
     }
 
     

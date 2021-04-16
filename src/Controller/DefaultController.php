@@ -6,6 +6,9 @@ namespace App\Controller;
 // chargement de la classe abstraite gérant les contrôleurs dans Symfony
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+// chargement du module de réponse
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  * Description of DefaultController extends de AbstractController
@@ -13,5 +16,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @author PITZ
  */
 class DefaultController extends AbstractController {
-    //put your code here
+    
+    public function index(){
+        return new Response("Hello World!",200);
+    }
+    
+    public function api(){
+        $array = ["identité"=>
+            ["nom"=>"Pitz","prénom"=>"Michaël"], 
+            ["nom"=>"Sandron","prénom"=>"Pierre"],
+                ];
+        return $this->json($array);
+    }
 }
