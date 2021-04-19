@@ -33,6 +33,9 @@ Dupliquez .env en .env.local (en changeant lk)
     // en mo daemon (-d sans affichage des logs)
     symfony server:start -d 
 
+    // pour stopper le serveur
+    symfony server:stop
+
 ### affichage des routes
 
     php bin/console debug:router
@@ -123,3 +126,10 @@ On peut ensuite les utiliser directement dans le contrôleur:
     }
     
 Vous pouvez maintenant voir l'url : https://127.0.0.1:8000/page/3
+
+## Installation de Twig
+
+Moteur de template:
+
+    composer require Twig
+
