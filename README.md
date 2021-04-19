@@ -133,3 +133,24 @@ Moteur de template:
 
     composer require Twig
 
+dans le contrôleur:
+
+    src/Controller/DefaultController.php
+    ...
+    /**
+     * @Route(name="accueilBlog", path="/blog/")
+     */
+    public function accueilBlog(){
+        return $this->render("blog/blog_index.html.twig", []);
+    }
+
+dans templates:
+
+    templates/blog/blohg_index.html.twig
+    ....
+    {# accueil du blog#}
+    {% extends "base.html.twig" %}
+    {% block title %}Bienvenue sur le blog{% endblock %}
+    {% block haut %}<h1>Bienvenue sur le blog</h1>{% endblock %}
+    {% block milieu %}Milieu Lien vers l'<a href="{{ path("api") }}">api</a>{% endblock %}
+    {% block bas %}{% endblock %}
