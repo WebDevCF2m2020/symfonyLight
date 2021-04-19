@@ -20,6 +20,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DefaultController extends AbstractController {
     
+    /*
+     * routage par yaml
+     */
+    
     public function index(){
         return new Response("Hello World!",200);
     }
@@ -37,6 +41,11 @@ class DefaultController extends AbstractController {
         return new Response("Hello $name", 200);
         
     }
+    
+    /*
+     * Routage par annotations
+     */
+    
     /**
      * @Route(name="page", path="/page/{idPage}",requirements={"idPage"="\d+"})
      * @param type $idPage
@@ -45,5 +54,11 @@ class DefaultController extends AbstractController {
     public function page($idPage) {
         $array = [1=>"lulu",2=>"lala",3=>"coucou"];
         return new Response($array[$idPage]);
+    }
+    /**
+     * @Route(name="accueilBlog", path="/blog/")
+     */
+    public function accueilBlog(){
+        return $this->render("blog/blog_index.html.twig", []);
     }
 }

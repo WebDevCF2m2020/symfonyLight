@@ -3,7 +3,7 @@ index:
     controller: App\Controller\DefaultController::index
 # exemple de json    
 api:
-    path: /MyApi
+    path: /monApi
     controller: App\Controller\DefaultController::api
 # gestion d'une variable get    
 hello:
