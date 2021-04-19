@@ -209,5 +209,15 @@ Effectuer la migration:
 
     php bin/console doctrine:migrations:migrate
 
+Pour rajouter un champs à l'entité message (jointure ManyToOne avec theuser)
+
+    php bin/console make:entity message
+
+    > idtheuser
+    > ManyToOne
+    > TheUser
+    > no
+    > yes
+
 
     

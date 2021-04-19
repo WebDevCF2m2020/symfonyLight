@@ -32,6 +32,12 @@ class Message
      */
     private $thedate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TheUser::class, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idtheuser;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Message
     public function setThedate(?\DateTimeInterface $thedate): self
     {
         $this->thedate = $thedate;
+
+        return $this;
+    }
+
+    public function getIdtheuser(): ?TheUser
+    {
+        return $this->idtheuser;
+    }
+
+    public function setIdtheuser(?TheUser $idtheuser): self
+    {
+        $this->idtheuser = $idtheuser;
 
         return $this;
     }
