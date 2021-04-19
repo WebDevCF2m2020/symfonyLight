@@ -38,6 +38,11 @@ class TheUser
     {
         $this->messages = new ArrayCollection();
     }
+    
+    // ce qu'on veut afficher quand l'objet doit être vu en tant que string
+    public function __toString() {
+        return $this->getThemail();
+    }
 
     public function getId(): ?int
     {

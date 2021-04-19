@@ -263,3 +263,22 @@ dans Twig
             'theuser' => $user,
         ]);
     }
+
+## chargement de la protection
+
+    composer require security
+
+## Créer un CRUD
+
+    composer require form validator
+
+    php bin/console make:crud
+
+création d'un CRUD, rajouter le toString pour représenter les users
+
+    src/Entity/TheUser.php
+    ...
+    // ce qu'on veut afficher quand l'objet doit être vu en tant que string
+    public function __toString() {
+        return $this->getThename();
+    }
