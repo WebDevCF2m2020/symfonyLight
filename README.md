@@ -164,3 +164,14 @@ Gestion des bases de données
 Changement dans le fichier de configuration .env.local
 
     DATABASE_URL="mysql://root:@127.0.0.1:3308/slight"
+
+Pour créer la DB slight
+
+    php bin/console doctrine:database:create
+
+## Installation du profiler
+Barre de gestion du fonctionnement de Symfony
+
+    composer require profiler
+
+Vous verrez une barre de profiling sur les pages avec un body

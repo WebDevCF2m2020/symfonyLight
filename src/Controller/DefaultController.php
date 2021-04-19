@@ -25,7 +25,7 @@ class DefaultController extends AbstractController {
      */
     
     public function index(){
-        return new Response("Hello World!",200);
+        return new Response("<body>Hello World!</body>",200);
     }
     
     public function api(){
