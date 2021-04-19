@@ -175,3 +175,39 @@ Barre de gestion du fonctionnement de Symfony
     composer require profiler
 
 Vous verrez une barre de profiling sur les pages avec un body
+
+## Installation du maker
+Permet de faire rapidement n'importe quel type d'actions
+
+    composer require maker
+
+### Création d'un contrôleur
+
+    php bin/console make:controller
+
+Création du contrôleur et de sa vue par défaut, la bonne pratique veut du UpperCamelCase et que la fin soit Nom"Controller"
+
+### Création d'une entité
+
+    php bin/console make:entity
+
+permet la création d'une entité (équivalence d'un mapping d'une table), génère le mapping dans
+
+    src/Entity
+
+et crée son "manager"
+
+    src/Repository
+
+### Migration vers MariaDB
+
+    php bin/console make:migration
+
+création du fichier de migration
+
+Effectuer la migration:
+
+    php bin/console doctrine:migrations:migrate
+
+
+    
