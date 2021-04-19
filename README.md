@@ -219,5 +219,47 @@ Pour rajouter un champs à l'entité message (jointure ManyToOne avec theuser)
     > no
     > yes
 
+### Affichage des theUser
 
+Affichage des utilisateurs avec Doctrine
+
+dans le contrôleur:
+
+        src/controller/siteController.php
+        ...
+        use App\Entity\TheUser;
+        ...
+        // récupération de tous les utilisateurs en utilisant doctrine
+        $users = $this->getDoctrine()
+                    ->getRepository(TheUser::class)
+                    ->findAll();
+        // appel de la vue
+        return $this->render('site/index.html.twig', [
+            'users' => $users,
+        ]);
+
+dans Twig
     
+    {% for item in users %}
+    <h3>{{ item.getThename }}</h3>
+    <p>{{ item.getThemail }} - <a href="{{ path("site_theuser_detail",{"slug":item.getThename}) }}">voir plus</a></p>
+    {% endfor %}
+    
+### Affichage du détail d'un utilisateur
+
+    src/controller/siteController.php
+        ...
+     /**
+     * @Route("/{slug}", name="site_theuser_detail")
+     */
+    public function userDetail($slug): Response
+    {
+        // récupération d'un utilisateur en utilisant doctrine et son thename
+        $user = $this->getDoctrine()
+                    ->getRepository(TheUser::class)
+                    ->findOneBy(["thename"=>$slug]);
+        // appel de la vue
+        return $this->render('site/user_detail.html.twig', [
+            'theuser' => $user,
+        ]);
+    }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SiteController!{% endblock %}
+{% block title %}Détail de {{ theuser.getThename }}{% endblock %}
 
 {% block body %}
 <style>
@@ -9,15 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Accueil du site</h1>
+    <h1>Détail de {{ theuser.getThename }}</h1>
     <nav>
         <ul>
             <li><a href="{{ path("site_accueil") }}">Accueil</a></li>
         </ul>
     </nav>
-{% for item in users %}
-    <h3>{{ item.getThename }}</h3>
-    <p>{{ item.getThemail }} - <a href="{{ path("site_theuser_detail",{"slug":item.getThename}) }}">voir plus</a></p>
-{% endfor %}
+
+        <h2>{{ theuser.getId }}</h2>
+    <h3>{{ theuser.getThename }}</h3>
+    <p>{{ theuser.getThemail }}</p>
+
 </div>
 {% endblock %}
