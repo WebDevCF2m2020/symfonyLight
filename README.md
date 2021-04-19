@@ -146,7 +146,7 @@ dans le contrôleur:
 
 dans templates:
 
-    templates/blog/blohg_index.html.twig
+    templates/blog/blog_index.html.twig
     ....
     {# accueil du blog#}
     {% extends "base.html.twig" %}
@@ -154,3 +154,13 @@ dans templates:
     {% block haut %}<h1>Bienvenue sur le blog</h1>{% endblock %}
     {% block milieu %}Milieu Lien vers l'<a href="{{ path("api") }}">api</a>{% endblock %}
     {% block bas %}{% endblock %}
+
+## Installation de l'ORM - Doctrine
+
+Gestion des bases de données
+
+    composer require orm
+
+Changement dans le fichier de configuration .env.local
+
+    DATABASE_URL="mysql://root:@127.0.0.1:3308/slight"
