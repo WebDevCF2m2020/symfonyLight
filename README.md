@@ -310,3 +310,13 @@ Enfant de base.html.twig, il va pemettre d'avoir un design minimal responsive po
 
     templates/bootstrap_4.html.twig
 
+#### activer les formulaires bootstrap par défaut
+
+Dans le fichier:
+
+    config/packages/twig.yaml
+    ...
+    twig:
+        default_path: '%kernel.project_dir%/templates'
+        form_themes: ['bootstrap_4_layout.html.twig']
+
