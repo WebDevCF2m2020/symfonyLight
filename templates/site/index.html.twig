@@ -12,6 +12,11 @@
             {% for item in users %}
                 <h3>{{ item.getThename }}</h3>
                 <p>{{ item.getThemail }} - <a href="{{ path("site_theuser_detail",{"slug":item.getThename}) }}">voir plus</a></p>
+                {% for message in item.messages %}
+                    <h5>{{ message.thetitle }}</h5>
+                    <p>{{ message.themessage }}</p>
+                    <br>
+                {% endfor %}
             {% endfor %}
         </div>
     </main>

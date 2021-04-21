@@ -77,7 +77,7 @@ class TheUserAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
-        throw new \Exception('TODO: check the credentials inside '.__FILE__);
+        return ($user->getPassword()==$credentials['password'])? true: false;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
@@ -85,9 +85,13 @@ class TheUserAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
+        if ($token->getRoleNames()[0]=="ROLE_USER"){
+            return new RedirectResponse($this->urlGenerator->generate('site_accueil'));
+        }else{
+            return new RedirectResponse($this->urlGenerator->generate('message_index'));
+        }
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        //return new RedirectResponse($this->urlGenerator->generate('message_index'));
     }
 
     protected function getLoginUrl()

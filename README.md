@@ -389,3 +389,67 @@ puis
 
     php bin/console doctrine:migrations:migrate
     
+## Connexion
+Le login se trouve par défaut à l'adresse 
+
+    /login
+
+on va comparer les mots de passe (différentes méthodes possibles), on va comparer en mode text
+
+    src/security/TheUserAuthenticator.php
+    ...
+    public function checkCredentials($credentials, UserInterface $user)
+    {
+        // Check the user's password or other credentials and return true or false
+        // If there are no credentials to check, you can just return true
+        return ($user->getPassword()==$credentials['password'])? true: false;
+    }
+
+en cas de succès, on va vérifier le rôle (ici la conversion du champs en json garde la valeur mais pas la clef)
+
+    src/security/TheUserAuthenticator.php
+    ...
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+        if ($token->getRoleNames()[0]=="ROLE_USER"){
+            return new RedirectResponse($this->urlGenerator->generate('site_accueil'));
+        }else{
+            return new RedirectResponse($this->urlGenerator->generate('message_index'));
+        }
+        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        //return new RedirectResponse($this->urlGenerator->generate('message_index'));
+    }
+
+Dans le fichier on place notre entité comme moyen de connexion, enuiste les acces_control permettent de gérer les urls acceptées
+
+    config/security.yaml
+    ...
+    security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\TheUser
+                property: thename
+    ...
+    
+            guard:
+                authenticators:
+                    - App\Security\TheUserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: site_accueil
+    ...
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/profile, roles: ROLE_USER }
+
+
+composer require twig/extra-bundle
