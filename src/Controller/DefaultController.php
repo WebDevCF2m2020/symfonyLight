@@ -59,6 +59,7 @@ class DefaultController extends AbstractController {
      * @Route(name="accueilBlog", path="/blog/")
      */
     public function accueilBlog(){
+        // appel d'un fichier twig
         return $this->render("blog/blog_index.html.twig", []);
     }
 }

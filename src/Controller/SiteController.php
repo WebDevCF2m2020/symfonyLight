@@ -36,6 +36,10 @@ class SiteController extends AbstractController
         $user = $this->getDoctrine()
                     ->getRepository(TheUser::class)
                     ->findOneBy(["thename"=>$slug]);
+        // pas de $user
+        if(!$user){
+            throw $this->createNotFoundException("Pas d'utilisateur qui porte le nom $slug");
+        }
         // appel de la vue
         return $this->render('site/user_detail.html.twig', [
             'theuser' => $user,
