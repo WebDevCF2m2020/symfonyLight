@@ -451,5 +451,18 @@ Dans le fichier on place notre entité comme moyen de connexion, enuiste les acc
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
 
+### Twig
 
 composer require twig/extra-bundle
+
+et
+
+composer require twig/string-extra
+
+pour pouvoir utiliser le u.truncate pour couper un texte sans couper dans les mots
+
+    {% for message in item.messages %}
+                    <h5>{{ message.thetitle }}</h5>
+                    <p>{{ message.themessage|u.truncate(5) }}</p>
+                    <br>
+                {% endfor %}
