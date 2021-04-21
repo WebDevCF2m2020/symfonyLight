@@ -264,6 +264,27 @@ dans Twig
         ]);
     }
 
+#### En cas d'utilisateur non trouvé
+Utilisation de l'erreur 404 par défaut (sinon erreur 500)
+
+    src/controller/siteController.php
+    ...
+    // récupération d'un utilisateur en utilisant doctrine et son thename
+        $user = $this->getDoctrine()
+                ->getRepository(TheUser::class)
+                ->findOneBy(["thename" => $slug]);
+        // pas de $user trouvé
+        if (!$user) {
+            // création d'une erreur 404
+            throw $this->createNotFoundException(
+                            "Pas d'utilisateur dont le nom est $slug"
+            );
+        }
+        // appel de la vue
+        return $this->render('site/user_detail.html.twig', [
+                    'theuser' => $user,
+        ]);
+
 ## chargement de la protection
 
     composer require security
@@ -274,7 +295,7 @@ dans Twig
 
     php bin/console make:crud
 
-création d'un CRUD, rajouter le toString pour représenter les users
+#### création d'un CRUD, rajouter le toString pour représenter les users
 
     src/Entity/TheUser.php
     ...
