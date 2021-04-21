@@ -306,3 +306,86 @@ Pour une mise en page rapide des formulaires
     twig:
         default_path: '%kernel.project_dir%/templates'
         form_themes: ['bootstrap_4_layout.html.twig']
+
+### Authentification
+
+    php bin/console make:auth
+
+    - 1 (login)
+    - TheUserAuthentication
+    - SecurityController
+    - App\Entity\TheUser
+    - [1] thename (login demandé)
+    - Yes (create logout)
+
+Erreur, TheUser doit être implémenté
+
+    src/Entity/TheUser.php
+    ...
+    // on veut utiliser cette classe pour la gestion d'utilisateur
+    use Symfony\Component\Security\Core\User\UserInterface;
+    ...
+    class TheUser implements UserInterface {
+    ...
+    
+    // classes de UserInterface
+    public function eraseCredentials() {
+        
+    }
+
+    public function getPassword() {
+        
+    }
+
+    public function getRoles(): array {
+        
+    }
+
+    public function getSalt() {
+        
+    }
+
+    public function getUsername(): string {
+        // on va renvoyer son équivalent dans notre table
+        return $this->thename;
+    }
+
+## Ensuite on doit modifier la table theuser
+
+Pour qu'elle "colle" avec la connexion à Symfony
+
+    php bin/console make:entity
+    TheUser
+    - thepwd string 255
+    - theroles json
+
+On remplit les 4 champs venant du implements avec nos champs correspondants
+
+
+    src/Entity/TheUser.php
+    ...
+    public function getPassword() {
+        return $this->thepwd;
+    }
+
+    public function getRoles(): array {
+        return $this->theroles;
+    }
+
+    public function getSalt() {
+        
+    }
+
+    public function getUsername(): string {
+        // on va renvoyer son équivalent dans notre table
+        return $this->thename;
+    }
+
+### Mise à jour de la DB
+
+    php bin/console make:migration
+
+puis
+
+    php bin/console doctrine:migrations:migrate
+    
