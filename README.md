@@ -286,3 +286,23 @@ création d'un CRUD, rajouter le toString pour représenter les users
     public function __toString() {
         return $this->getThename();
     }
+
+## Création d'un template bootstrap 4
+
+    template/bootstrap_4.html.twig
+
+https://github.com/WebDevCF2m2020/symfonyLight/blob/main/templates/bootstrap_4.html.twig
+
+Dont vont hériter les filles (lui-même enfant de base.html.twig)
+
+Ensuite on l'applique à nos templates
+
+### Pour les formulaires par défauts
+
+Pour une mise en page rapide des formulaires
+
+    config/packages/twig.yaml
+    ...
+    twig:
+        default_path: '%kernel.project_dir%/templates'
+        form_themes: ['bootstrap_4_layout.html.twig']

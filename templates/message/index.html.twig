@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'bootstrap_4.html.twig' %}
 
 {% block title %}Message index{% endblock %}
 
-{% block body %}
+{% block content %}
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
     <h1>Message index</h1>
 
     <table class="table">
@@ -36,4 +38,5 @@
     </table>
 
     <a href="{{ path('message_new') }}">Create new</a>
+        </div></main>
 {% endblock %}
