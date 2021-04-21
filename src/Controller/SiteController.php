@@ -9,43 +9,43 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\TheUser;
 
 /**
-* @Route("/site")
-*/
-class SiteController extends AbstractController
-{
+ * @Route("/site")
+ */
+class SiteController extends AbstractController {
+
     /**
      * @Route("/", name="site_accueil")
      */
-    public function index(): Response
-    {
+    public function index(): Response {
         // récupération de tous les utilisateurs en utilisant doctrine
         $users = $this->getDoctrine()
-                    ->getRepository(TheUser::class)
-                    ->findAll();
+                ->getRepository(TheUser::class)
+                ->findAll();
         // appel de la vue
         return $this->render('site/index.html.twig', [
-            'users' => $users,
+                    'users' => $users,
         ]);
     }
+
     /**
      * @Route("/{slug}", name="site_theuser_detail")
      */
-    public function userDetail($slug): Response
-    {
+    public function userDetail($slug): Response {
         // récupération d'un utilisateur en utilisant doctrine et son thename
         $user = $this->getDoctrine()
-                    ->getRepository(TheUser::class)
-                    ->findOneBy(["thename"=>$slug]);
+                ->getRepository(TheUser::class)
+                ->findOneBy(["thename" => $slug]);
         // pas de $user trouvé
         if (!$user) {
             // création d'une erreur 404
-        throw $this->createNotFoundException(
-            "Pas d'utilisateur dont le nom est $slug"
-        );
+            throw $this->createNotFoundException(
+                            "Pas d'utilisateur dont le nom est $slug"
+            );
         }
         // appel de la vue
         return $this->render('site/user_detail.html.twig', [
-            'theuser' => $user,
+                    'theuser' => $user,
         ]);
     }
+
 }
