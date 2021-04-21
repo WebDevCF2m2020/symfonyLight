@@ -303,3 +303,10 @@ Utilisation de l'erreur 404 par défaut (sinon erreur 500)
     public function __toString() {
         return $this->getThename();
     }
+
+### Ajout d'un bootstrap
+
+Enfant de base.html.twig, il va pemettre d'avoir un design minimal responsive pour nos autres pages
+
+    templates/bootstrap_4.html.twig
+
