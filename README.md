@@ -320,3 +320,21 @@ Dans le fichier:
         default_path: '%kernel.project_dir%/templates'
         form_themes: ['bootstrap_4_layout.html.twig']
 
+### Créez une autentification
+
+    php bin/console make:auth
+
+implémentation dans TheUser
+
+    use Symfony\Component\Security\Core\User\UserInterface;
+
+
+
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\TheUser
+                property: thename
